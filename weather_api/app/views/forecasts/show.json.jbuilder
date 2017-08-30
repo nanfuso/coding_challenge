@@ -1,0 +1,1 @@
+json.partial! @forecast, partial: 'forecast', as: :forecast
