@@ -5,12 +5,10 @@
 
 <h1>3 Day Forecast for <%= @zip_code %></h1>
 
-<%= @forecasts.each do |forecast| %>
+<% @forecasts.each do |forecast| %>
     <h2><%= forecast.day %></h2>
-    <ul>
-        <li><%= forecast.high %></li>
-        <li><%= forecast.low %></li>
-        <li><%= forecast.description %></li>
-    </ul>
+        <div>High: <%= forecast.high %></div>
+        <div>Low: <%= forecast.low %></div>
+        <div>Conditions: <%= forecast.description %></div>
 <% end %>
 
