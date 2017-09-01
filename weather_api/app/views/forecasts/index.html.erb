@@ -1,0 +1,16 @@
+<form action="/" method="get">
+    Zip Code: <input type="text" name="zip_code">
+    <input type="submit" value="Find Weather">
+</form>
+
+<h1>3 Day Forecast for <%= @zip_code %></h1>
+
+<%= @forecasts.each do |forecast| %>
+    <h2><%= forecast.day %></h2>
+    <ul>
+        <li><%= forecast.high %></li>
+        <li><%= forecast.low %></li>
+        <li><%= forecast.description %></li>
+    </ul>
+<% end %>
+

@@ -1,21 +1,20 @@
 class ForecastsController < ApplicationController
 
     def index
-        @forecasts = Forecast.all
-    end
-
-    def create
-        @forecast = Forecast.create(
-                                    zip_code: params[:zip_code],
-                                    day: wunderground_simple_data["pretty"],
-                                    high: wunderground_simple_data["high"]["fahrenheit"],
-                                    low: wunderground_simple_data["low"]["fahrenheit"],
-                                    description: wunderground_simple_data["icon"]
-                                    )
-        render :show
-    end
-
-    def show
-        @forecast = Forecast.find(params[:id])
+        @zip_code = params[:zip_code] || "60604"
+        @forecasts = Forecast.where(zip_code: @zip_code) 
+        unless @forecasts.length != 0
+            @forecasts = Unirest.get("#{ ENV["API_HOST"]}/#{ ENV["API_TOKEN"] }/forecast/q/#{ @zip_code }.json").body["forecast"]["simpleforecast"]["forecastday"].first(3)
+            @forecasts.each do |response|
+                forecast = Forecast.new(
+                                            zip_code: @zip_code,
+                                            day: response["date"]["pretty"],
+                                            high: response["high"]["fahrenheit"],
+                                            low: response["low"]["fahrenheit"],
+                                            description: response["conditions"]
+                                            )
+                forecast.save
+            end
+        end
     end
 end
