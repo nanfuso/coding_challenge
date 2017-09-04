@@ -1,36 +1,12 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Weather App</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-      <form class="navbar-form navbar-left" action="/" method="get">
-        <div class="form-group">
-          <input type="text" name="zip_code" class="form-control" placeholder="60604">
-        </div>
-        <button type="submit" class="btn btn-default">Find Weather</button>
-      </form>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
+<div class="container-fluid">
 
 <h1>3 Day Forecast for <%= @zip_code %></h1>
-
 <% @forecasts.each do |forecast| %>
     <h2><%= forecast.day %></h2>
         <div>High: <%= forecast.high %></div>
         <div>Low: <%= forecast.low %></div>
         <div>Conditions: <%= forecast.description %></div>
 <% end %>
+
+</div>
 
